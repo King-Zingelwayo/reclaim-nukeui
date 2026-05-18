@@ -209,7 +209,7 @@ The `infra/modules/reclaim-ecs` Terraform module provisions a complete ECS Farga
 
 > Published Terraform Registry source: `registry.terraform.io/King-Zingelwayo/reclaim-nukeui-ecs/aws`.
 > See: https://registry.terraform.io/modules/King-Zingelwayo/reclaim-nukeui-ecs/aws/latest
-> Docker Hub image: https://hub.docker.com/repository/docker/indlovucloud/reclaim-aws-nukeui/latest
+> Docker Hub image: https://hub.docker.com/r/indlovucloud/reclaim-aws-nukeui
 
 ### Module usage example
 
