@@ -1,6 +1,6 @@
 # Reclaim Documentation
 
-> This README is generated from `docs/site/index.html`. See the HTML site version for the original layout.
+> This README is generated from `docs/site/index.html`. The main site docs are published at https://reclaim-docs.indlovucloud.co.za. See the HTML site version for the original layout.
 
 Images are available in `docs/site/images/` and are referenced by path in this document.
 
