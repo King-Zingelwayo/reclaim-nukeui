@@ -138,51 +138,51 @@ This section uses the app screenshots to show the main Reclaim workflow from the
 
 The dashboard is the first page after login. It shows overall totals, the most recent runs, and a quick view of top resource types.
 
-![Reclaim dashboard overview](docs/site/images/dashboard-overview.png)
+![Reclaim dashboard overview](images/dashboard-overview.png)
 
 ### 2. Explore configurations
 
 The **Configs** screen lists saved configurations and lets you edit them, start a dry run, or launch a live run.
 
-![Configs list page](docs/site/images/configs-list.png)
+![Configs list page](images/configs-list.png)
 
 ### 3. Build a new config
 
 The config builder gives you a form to name the config, select AWS regions, add account filters, and choose resource types from the side panel.
 
-![New config builder page](docs/site/images/config-builder.png)
+![New config builder page](images/config-builder.png)
 
 Use the account and blocklist panels to mark accounts that should be protected or targeted. The builder supports per-account filters and reusable presets.
 
-![Config account and filters section](docs/site/images/config-account-filters.png)
+![Config account and filters section](images/config-account-filters.png)
 
 ### 4. Review run history
 
 The **Run History** page shows every past run with its mode, status, trigger type, and duration. You can open any run to inspect the output.
 
-![Run history list](docs/site/images/run-history.png)
+![Run history list](images/run-history.png)
 
 ### 5. Inspect run output
 
 Each run detail page streams aws-nuke output in real time. This view highlights what would be deleted in a dry run and shows which resources were filtered or removed.
 
-![Run output detail page](docs/site/images/run-output.png)
+![Run output detail page](images/run-output.png)
 
 ### 6. Schedule recurring checks
 
 The **Schedules** section lets you create cron-based jobs for any saved config, choose dry-run or live mode, and enable or disable schedules with a single toggle.
 
-![Schedules list page](docs/site/images/schedules-list.png)
+![Schedules list page](images/schedules-list.png)
 
 When you create a new schedule, Reclaim shows a friendly expression preview and lets you save the cron job quickly.
 
-![New schedule creation dialog](docs/site/images/schedule-new.png)
+![New schedule creation dialog](images/schedule-new.png)
 
 ### 7. Scan live AWS resources
 
 The **Resource Scanner** page discovers live resources in a selected region and lets you mark them for deletion or protection before generating a config.
 
-![Resource scanner results](docs/site/images/resource-scanner.png)
+![Resource scanner results](images/resource-scanner.png)
 
 ## Docker Image Architecture
 
