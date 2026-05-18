@@ -138,51 +138,51 @@ This section uses the app screenshots to show the main Reclaim workflow from the
 
 The dashboard is the first page after login. It shows overall totals, the most recent runs, and a quick view of top resource types.
 
-![Reclaim dashboard overview](images/dashboard-overview.png)
+![Reclaim dashboard overview](docs/site/images/dashboard-overview.png)
 
 ### 2. Explore configurations
 
 The **Configs** screen lists saved configurations and lets you edit them, start a dry run, or launch a live run.
 
-![Configs list page](images/configs-list.png)
+![Configs list page](docs/site/images/configs-list.png)
 
 ### 3. Build a new config
 
 The config builder gives you a form to name the config, select AWS regions, add account filters, and choose resource types from the side panel.
 
-![New config builder page](images/config-builder.png)
+![New config builder page](docs/site/images/config-builder.png)
 
 Use the account and blocklist panels to mark accounts that should be protected or targeted. The builder supports per-account filters and reusable presets.
 
-![Config account and filters section](images/config-account-filters.png)
+![Config account and filters section](docs/site/images/config-account-filters.png)
 
 ### 4. Review run history
 
 The **Run History** page shows every past run with its mode, status, trigger type, and duration. You can open any run to inspect the output.
 
-![Run history list](images/run-history.png)
+![Run history list](docs/site/images/run-history.png)
 
 ### 5. Inspect run output
 
 Each run detail page streams aws-nuke output in real time. This view highlights what would be deleted in a dry run and shows which resources were filtered or removed.
 
-![Run output detail page](images/run-output.png)
+![Run output detail page](docs/site/images/run-output.png)
 
 ### 6. Schedule recurring checks
 
 The **Schedules** section lets you create cron-based jobs for any saved config, choose dry-run or live mode, and enable or disable schedules with a single toggle.
 
-![Schedules list page](images/schedules-list.png)
+![Schedules list page](docs/site/images/schedules-list.png)
 
 When you create a new schedule, Reclaim shows a friendly expression preview and lets you save the cron job quickly.
 
-![New schedule creation dialog](images/schedule-new.png)
+![New schedule creation dialog](docs/site/images/schedule-new.png)
 
 ### 7. Scan live AWS resources
 
 The **Resource Scanner** page discovers live resources in a selected region and lets you mark them for deletion or protection before generating a config.
 
-![Resource scanner results](images/resource-scanner.png)
+![Resource scanner results](docs/site/images/resource-scanner.png)
 
 ## Docker Image Architecture
 
@@ -199,9 +199,9 @@ The image is built using a **multi-stage Dockerfile** that keeps the final image
 
 | Layer | Size |
 | --- | --- |
-| Alpine base + runtime deps | ~10 MB |
-| Reclaim binary (Go app + embedded aws-nuke + frontend) | ~58 MB |
-| Total | ~68 MB |
+| Alpine base + runtime deps | ~3 MB |
+| Reclaim binary (Go app + embedded aws-nuke + frontend) | ~37 MB |
+| Total | ~40 MB |
 
 ## Self-Hosting on AWS ECS
 
@@ -209,7 +209,7 @@ The `infra/modules/reclaim-ecs` Terraform module provisions a complete ECS Farga
 
 > Published Terraform Registry source: `registry.terraform.io/King-Zingelwayo/reclaim-nukeui-ecs/aws`.
 > See: https://registry.terraform.io/modules/King-Zingelwayo/reclaim-nukeui-ecs/aws/latest
-> Docker Hub image: https://hub.docker.com/r/indlovucloud/reclaim-aws-nukeui
+> Docker Hub image:https://hub.docker.com/r/indlovucloud/reclaim-aws-nukeui
 
 ### Module usage example
 
@@ -514,21 +514,8 @@ End-to-end steps to deploy Reclaim to AWS ECS Fargate from scratch.
 - An ACM certificate in the deployment region (for HTTPS)
 - A VPC with public and private subnets (the example `infra/deployments/prod/main.tf` creates one)
 
-### Step 1 — Create the auth token secret
 
-```bash
-aws secretsmanager create-secret \
-  --name reclaim/auth-token \
-  --region eu-west-1 \
-  --secret-string "$(openssl rand -hex 32)"
-
-# Note the ARN — you'll need it for Terraform
-aws secretsmanager describe-secret \
-  --secret-id reclaim/auth-token \
-  --query 'ARN' --output text
-```
-
-### Step 2 — Configure Terraform variables
+### Step 1 — Configure Terraform variables
 
 Create a `terraform.tfvars` file in your deployment directory:
 
@@ -552,7 +539,7 @@ tags = {
 }
 ```
 
-### Step 3 — Initialise and apply Terraform
+### Step 2 — Initialise and apply Terraform
 
 ```bash
 cd <your-deployment-directory>
@@ -575,7 +562,7 @@ Terraform will create (in order): VPC + subnets + NAT gateways, S3 bucket + S3 F
 
 The apply typically takes 3–5 minutes. The ECS service will show as `RUNNING` once the health check passes.
 
-### Step 4 — Add trust policies to target accounts
+### Step 3 — Add trust policies to target accounts
 
 Get the task role ARN from Terraform output:
 
@@ -602,7 +589,7 @@ Or use the pre-formatted snippet from Terraform:
 terraform output -raw target_account_trust_policy_snippet
 ```
 
-### Step 5 — Verify the deployment
+### Step 4 — Verify the deployment
 
 ```bash
 # Get the ALB DNS name
